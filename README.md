@@ -1,24 +1,10 @@
 # vue-todo
 
-## Project setup
-```
-npm install
-```
+## Why
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Vue.js 프레임워크를 사용한 컴포넌트 기반 개발을 익히기 위해
+- Vue.js 프레임워크에서 Vuex를 사용한 상태관리를 익히기 위해
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## What
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 간단한 todo 앱을 만들어 본다.
