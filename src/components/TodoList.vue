@@ -3,10 +3,17 @@
     <ul>
       <li
         v-for="(todoItem, index) in todoItems"
-        v-bind:key="todoItem"
+        v-bind:key="todoItem.item"
         class="shadow"
       >
-        {{ todoItem }}
+        <i
+          class="fas fa-check checkBtn"
+          v-bind:class="{ checkBtnCompleted: todoItem.completed }"
+          v-on:click="toggleComplete(todoItem)"
+        ></i>
+        <span v-bind:class="{ textCompleted: todoItem.completed }">{{
+          todoItem.item
+        }}</span>
         <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
           <i class="fas fa-trash-alt"></i>
         </span>
@@ -28,13 +35,21 @@ export default {
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index, 1);
     },
+    toggleComplete: function(todoItem) {
+      todoItem.completed = !todoItem.completed;
+      // update 메소드가 없기 때문에 삭제하고 다시 추가
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
   },
   created: function() {
     if (localStorage.length > 0) {
       for (var i = 0; i < localStorage.length; i++) {
         // console.log(localStorage.key(i));
         if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(localStorage.key(i));
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(i)))
+          );
         }
       }
     }
