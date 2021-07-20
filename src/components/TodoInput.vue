@@ -16,30 +16,30 @@
 </template>
 
 <script>
-import Modal from "./common/Modal.vue";
+import Modal from './common/Modal.vue';
 
 export default {
-  data: function() {
+  data() {
     return {
-      newTodoItem: "",
+      newTodoItem: '',
       showModal: false,
     };
   },
   methods: {
-    addTodo: function() {
-      if (this.newTodoItem !== "") {
-        this.$emit("addTodoItem", this.newTodoItem);
+    addTodo() {
+      if (this.newTodoItem !== '') {
+        this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
       } else {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function() {
-      this.newTodoItem = "";
+    clearInput() {
+      this.newTodoItem = '';
     },
   },
   components: {
-    Modal: Modal,
+    Modal,
   },
 };
 </script>
