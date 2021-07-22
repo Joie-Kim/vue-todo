@@ -10,7 +10,6 @@
         <i class="fas fa-times closeModalBtn" @click="showModal = false"></i>
       </h3>
       <p slot="body">내용을 입력하세요.</p>
-      <!-- <button slot="footer">OK</button> -->
     </Modal>
   </div>
 </template>
@@ -28,7 +27,6 @@ export default {
   methods: {
     addTodo() {
       if (this.newTodoItem !== '') {
-        // this.$emit('addTodoItem', this.newTodoItem);
         this.$store.commit('addOneItem', this.newTodoItem);
         this.clearInput();
       } else {

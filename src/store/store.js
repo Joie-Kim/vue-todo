@@ -26,7 +26,6 @@ export const store = new Vuex.Store({
   },
   mutations: {
     addOneItem(state, todoItem) {
-      console.log('hi');
       const obj = {
         completed: false,
         item: todoItem,
@@ -40,16 +39,9 @@ export const store = new Vuex.Store({
       state.todoItems.splice(payload.index, 1);
     },
     toggleOneItem(state, payload) {
-      // 좀 더 컨테이너 같이 변경
-      // todoItem.completed = !todoItem.completed;
-      state.todoItems[payload.index].completed = !this.todoItems[payload.index]
-        .completed;
-      // update 메소드가 없기 때문에 삭제하고 다시 추가
+      state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
       localStorage.removeItem(payload.todoItem.item);
-      localStorage.setItem(
-        payload.todoItem.item,
-        JSON.stringify(payload.todoItem)
-      );
+      localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
     },
     clearAllItem(state) {
       localStorage.clear();
