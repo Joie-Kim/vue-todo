@@ -14,12 +14,6 @@ import TodoList from './components/TodoList.vue';
 import TodoFooter from './components/TodoFooter.vue';
 
 export default {
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-  methods: {},
   components: {
     // 컴포넌트 태그명: 컴포넌트 내용
     TodoHeader,

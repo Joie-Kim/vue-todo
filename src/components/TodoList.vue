@@ -1,10 +1,10 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
-        <i class="fas fa-check checkBtn" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete(todoItem, index)"></i>
+      <li v-for="(todoItem, index) in this.getTodoItems" v-bind:key="todoItem.item" class="shadow">
+        <i class="fas fa-check checkBtn" v-bind:class="{ checkBtnCompleted: todoItem.completed }" v-on:click="toggleComplete({ todoItem, index })"></i>
         <span v-bind:class="{ textCompleted: todoItem.completed }">{{ todoItem.item }}</span>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({ todoItem, index })">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -13,15 +13,19 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      // this.$store.commit('removeOneItem', { todoItem: todoItem, index: index });
-      this.$store.commit('removeOneItem', { todoItem, index });
-    },
-    toggleComplete(todoItem, index) {
-      this.$store.commit('toggleOneItem', { todoItem, index });
-    },
+    // helper 함수는 인자를 선언하지 않아도, 인자를 넘겨주면 알아서 반영해줌.
+    // 다만, store에서 obj로 받고 있기 때문에 <template>에서 인자 2개로 보냈던 것을 obj로 묶어서 호출.
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+      toggleComplete: 'toggleOneItem',
+    }),
+  },
+  computed: {
+    ...mapGetters(['getTodoItems']),
   },
 };
 </script>
